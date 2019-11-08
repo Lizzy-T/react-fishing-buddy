@@ -1,0 +1,52 @@
+#login-form, #signup-form {
+	align-self: flex-start;
+	grid-row: 2 / span 2;
+	display: grid;
+	grid-template-columns: 240px 240px;
+	align-items: center;
+    justify-content: center;
+    justify-items: end;
+    grid-column-gap: 7px;
+	grid-row-gap: 5px;
+}
+
+#login-form h2, #signup-form h2 {
+	grid-column: 1 / span 2;
+    align-self: stretch;
+    justify-self: stretch;
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.form-input {
+	justify-self: start;
+}
+
+.side-note {
+	grid-column: 1 / span 2;
+    align-self: center;
+	justify-self: center;
+}
+
+#submit-new-user, #login-submit{
+    grid-column: 1 / span 2;
+    align-self: center;
+    justify-self: center;
+	width: 10rem;
+	margin-top: 9px;
+}
+
+#errors {
+	margin-top: 9px;
+    color: red;
+    grid-column: 1 / span 2;
+    align-self: stretch;
+    justify-self: stretch;
+    text-align: center;
+}
+
+#errors li {
+	font-size: 11px;
+	grid-column: 1 / span 2;
+}
