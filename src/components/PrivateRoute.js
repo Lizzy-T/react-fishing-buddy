@@ -4,21 +4,21 @@ import {
     Redirect
 } from 'react-router-dom'
 
-export default function PrivateRoute({children, ...rest}) {
 
+export default function PrivateRoute({children, ...rest}) {
+    console.log(rest)
     return (
         <Route
-           {...rest}
-           render={({location, isAuthenticated}) => 
-                isAuthenticated ? (
-                    children
-                ) : (
+            path = "/"
+           render={ ({location}) => {
+                    return localStorage.token ?
+                    children                  
+                    :
                     <Redirect to={{
                         pathname: '/login',
-                        state: { from: location }
+                        state: { from : location }
                     }} />
-                )
-            }
+                }}
         />
     )
 }
