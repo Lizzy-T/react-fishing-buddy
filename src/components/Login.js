@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
     Link,
     Route,
@@ -13,20 +13,18 @@ import "./Login.css"
 
 const BASE_URL = "https://fishing-buddy-api.herokuapp.com"
 
-export default class Login extends Component {
+export default function Login () {
 
-    state = {
-        username: "",
-        password: ""
+    const fetchToken = ({username, password}) => {
+        return fetch(`${BASE_URL}/login`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({username, password})
+        })
     }
 
-    handleChange = property = event => {
-        console.log(property)
-        console.log(event)
-    }
-
-    render() {
-        const {username, password} = this.state
         return (
             <>
                 <header>
@@ -40,7 +38,7 @@ export default class Login extends Component {
                             <Link to="/signup">Signup</Link>
                         </li>
                         <li>
-                            <Link to='/'>Login</Link>
+                            <Link to='/login'>Login</Link>
                         </li>
                     </ul>
                 </nav>
@@ -49,16 +47,13 @@ export default class Login extends Component {
                         <Route path='/signup'>
                             <SignupForm />
                         </Route>
-                        <Route path='/'>
+                        <Route path='/login'>
                             <LoginForm 
-                                username={username} 
-                                password={password} 
-                                handleChange={this.handleChange}    
+                                fetchToken={fetchToken}    
                             />
                         </Route>
                     </Switch>
                 </main>
             </>
         )
-    }
 }
