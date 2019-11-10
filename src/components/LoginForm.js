@@ -14,7 +14,9 @@ export default class LoginPage extends Component {
     }
 
     componentDidMount = () => {
+        const { removeCurrentUser } = this.props
         localStorage.clear()
+        removeCurrentUser()
     }
 
     handleChange = event => {
@@ -27,8 +29,9 @@ export default class LoginPage extends Component {
     handleSubmit = event => {
         event.preventDefault()
         
-        const { fetchToken } = this.props
+        const { fetchToken, setCurrentUser } = this.props
         const { username, password } = this.state
+        const history = createBrowserHistory()
 
         fetchToken({username, password})
             .then(response => {
@@ -38,12 +41,14 @@ export default class LoginPage extends Component {
                 return response.json()
             }).then(response => {
                 localStorage.setItem("token", response.token)
+                setCurrentUser(username)
                 this.setState({
                     username: '',
                     password: ''
                 })
-            }).then(() => createBrowserHistory().push("/"))
-            .catch(error => console.log(error))
+            }).then(() => {
+                history.push("/")
+            }).catch(error => console.log(error))
     }
 
     render () {

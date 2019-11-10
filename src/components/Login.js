@@ -13,7 +13,7 @@ import "./Login.css"
 
 const BASE_URL = "https://fishing-buddy-api.herokuapp.com"
 
-export default function Login () {
+export default function Login ({setCurrentUser, removeCurrentUser}) {
 
     const fetchToken = ({username, password}) => {
         return fetch(`${BASE_URL}/login`, {
@@ -49,7 +49,9 @@ export default function Login () {
                         </Route>
                         <Route path='/login'>
                             <LoginForm 
-                                fetchToken={fetchToken}    
+                                fetchToken={fetchToken}
+                                removeCurrentUser={removeCurrentUser}
+                                setCurrentUser={setCurrentUser}
                             />
                         </Route>
                     </Switch>

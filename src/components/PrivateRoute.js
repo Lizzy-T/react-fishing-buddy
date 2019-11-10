@@ -3,20 +3,24 @@ import {
     Route,
     Redirect
 } from 'react-router-dom'
+import {
+    createBrowserHistory
+} from 'history'
 
 
-export default function PrivateRoute({children, ...rest}) {
-    console.log(rest)
+export default function PrivateRoute({component: Component, ...rest}) {
+    const history = createBrowserHistory()
+    console.log("history location", history.location)
     return (
         <Route
-            path = "/"
-           render={ ({location}) => {
+            {...rest}
+           render={(props) => {
                     return localStorage.token ?
-                    children                  
+                    <Component {...props} />                 
                     :
                     <Redirect to={{
                         pathname: '/login',
-                        state: { from : location }
+                        state: { from : props.location }
                     }} />
                 }}
         />
