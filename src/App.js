@@ -30,17 +30,17 @@ export default class App extends Component {
     }
 
     render () {
-        const { currentUser } = this.state
-        console.log("current user", currentUser)
         return (
             <Router >
-                <PrivateRoute exact path="/" component={Home} />
-                <Route path="/login" 
-                        render={(props) => <Login 
-                            {...props}
-                            setCurrentUser={this.setCurrentUser}
-                            removeCurrentUser={this.removeCurrentUser}
-                    />} />
+                <Switch >
+                    <PrivateRoute exact path="/" component={Home} />
+                    <Route path="/login" 
+                            render={(props) => <Login 
+                                {...props}
+                                setCurrentUser={this.setCurrentUser}
+                                removeCurrentUser={this.removeCurrentUser}
+                        />} />
+                </Switch>
             </Router>
         )
     }

@@ -5,6 +5,7 @@ import logo from '../Bearcubsfly.png'
 
 export default class Home extends Component {
     render() {
+        console.log("made it home")
         return (
             <>
                 <header>

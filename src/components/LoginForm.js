@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import {
-    createBrowserHistory
-} from 'history'
+    withRouter
+} from 'react-router-dom'
 
 
 import './loginform.css'
 
-export default class LoginPage extends Component {
+class LoginPage extends Component {
 
     state = {
         username: "",
@@ -29,10 +29,9 @@ export default class LoginPage extends Component {
     handleSubmit = event => {
         event.preventDefault()
         
-        const { fetchToken, setCurrentUser } = this.props
+        const { fetchToken, setCurrentUser,history } = this.props
         const { username, password } = this.state
-        const history = createBrowserHistory()
-
+        
         fetchToken({username, password})
             .then(response => {
                 if (response.status >= 400) {
@@ -78,3 +77,5 @@ export default class LoginPage extends Component {
         )
     }
 }
+
+export default withRouter(LoginPage)
